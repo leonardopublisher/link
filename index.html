@@ -56,6 +56,52 @@
       font-weight: 800;
       color: #3F4FFF;
     }
+
+    /* Rodapé */
+    .rodape {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+      background: #fafafa;
+      border-top: 1px solid #e3e3e3;
+      box-sizing: border-box;
+    }
+
+    .rodape img {
+      height: 34px;
+      width: auto;
+    }
+
+    .rodape span {
+      font-size: 14px;
+      font-weight: 600;
+      color: #8a8a8a;
+    }
+
+    /* Estado: modal do Instagram aberto */
+    .logo, button, p {
+      transition: opacity 0.2s ease;
+    }
+
+    body.aberto .logo,
+    body.aberto button {
+      display: none !important;
+    }
+
+    body.aberto p {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+      margin: 0;
+      padding: 0 24px;
+      box-sizing: border-box;
+    }
   </style>
 </head>
 
@@ -69,13 +115,44 @@
     Selecione <strong>Open</strong> para abrir o AdsFy
   </p>
 
+  <footer class="rodape">
+    <img id="rodape-logo" alt="AdsFy">
+    <span>© 2026 AdsFy</span>
+  </footer>
+
   <script>
+    var aberto = false;
+    var inicio = 0;
+
+    // Reaproveita a mesma logo no rodapé
+    document.getElementById("rodape-logo").src = document.querySelector(".logo").src;
+
+    function restaurar() {
+      // ignora eventos que disparam junto com a abertura do modal
+      if (!aberto || Date.now() - inicio < 500) return;
+      aberto = false;
+      document.body.classList.remove("aberto");
+    }
+
     document.getElementById("abrir").addEventListener("click", function () {
       const destino = "https://adsfy.it/app";
       const link = "instagram://extbrowser/?url=" + encodeURIComponent(destino);
 
+      aberto = true;
+      inicio = Date.now();
+      document.body.classList.add("aberto");
+
       window.location.href = link;
     });
+
+    // Modal fechado (Cancel) ou volta para a página: tudo volta ao normal
+    window.addEventListener("focus", restaurar);
+    window.addEventListener("pageshow", restaurar);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) restaurar();
+    });
+    document.addEventListener("touchstart", restaurar, { passive: true });
+    document.addEventListener("click", restaurar);
   </script>
 
 </body>
