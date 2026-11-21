@@ -2,62 +2,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Acessar Adsfy</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abrir AdsFy</title>
 
-<style>
-body {
-  background: #111;
-  color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 70px 20px;
-}
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+    }
 
-button {
-  background: #25d366;
-  color: black;
-  padding: 18px 30px;
-  border: 0;
-  border-radius: 12px;
-  font-size: 19px;
-  font-weight: bold;
-  cursor: pointer;
-}
-</style>
+    button {
+      background: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    p {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #333333;
+    }
+
+    strong {
+      color: #3B82F6;
+    }
+  </style>
 </head>
 
 <body>
 
-<h2>Acesse o Adsfy</h2>
+  <button id="abrir">ABRIR APLICATIVO</button>
 
-<p id="status">
-Clique abaixo para continuar.
-</p>
+  <p>
+    Selecione <strong>OPEN</strong> para abrir o AdsFy
+  </p>
 
-<button id="primeiro">
-ABRIR ADSFY
-</button>
+  <script>
+    document.getElementById("abrir").addEventListener("click", function () {
+      const destino = "https://adsfy.it/app";
+      const link = "instagram://extbrowser/?url=" + encodeURIComponent(destino);
 
-<script>
-document.getElementById("primeiro")
-.addEventListener("click", function() {
-
-  var destino = "https://adsfy.it/app";
-
-  var comando =
-    "instagram://extbrowser/?url=" +
-    encodeURIComponent(destino);
-
-  document.getElementById("status").innerText =
-    "Abrindo navegador externo...";
-
-  // Executa o comando após o primeiro clique.
-  window.location.href = comando;
-
-});
-</script>
+      window.location.href = link;
+    });
+  </script>
 
 </body>
 </html>
