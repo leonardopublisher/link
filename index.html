@@ -1,109 +1,60 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111111">
-
-<title>Abrir Adsfy</title>
+<title>Acessar Adsfy</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: #111;
-  color: #fff;
+  color: white;
   font-family: Arial, sans-serif;
   text-align: center;
-}
-
-.container {
-  width: 100%;
-  max-width: 380px;
-}
-
-h1 {
-  font-size: 26px;
-  margin-bottom: 12px;
-}
-
-p {
-  color: #ccc;
-  line-height: 1.5;
-  font-size: 15px;
+  padding: 70px 20px;
 }
 
 button {
-  width: 100%;
-  padding: 17px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 12px;
   background: #25d366;
-  color: #000;
+  color: black;
+  padding: 18px 30px;
+  border: 0;
+  border-radius: 12px;
   font-size: 19px;
   font-weight: bold;
   cursor: pointer;
-}
-
-.aviso {
-  margin-top: 22px;
-  padding: 15px;
-  background: #222;
-  border-radius: 12px;
-  font-size: 13px;
-  color: #aaa;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<h2>Acesse o Adsfy</h2>
 
-  <h1>Acesse o Adsfy</h1>
+<p id="status">
+Clique abaixo para continuar.
+</p>
 
-  <p>
-    Clique no botão abaixo para abrir o Adsfy
-    no navegador externo do seu dispositivo.
-  </p>
-
-  <button id="abrir">
-    ABRIR ADSFY
-  </button>
-
-  <div class="aviso">
-    <p>
-      <strong>Importante:</strong>
-    </p>
-
-    Ao continuar, o Instagram tentará abrir
-    o endereço no navegador externo do seu dispositivo.
-
-    <p>
-      Destino: https://adsfy.it/app
-    </p>
-  </div>
-
-</div>
+<button id="primeiro">
+ABRIR ADSFY
+</button>
 
 <script>
-document.getElementById("abrir").addEventListener("click", function() {
+document.getElementById("primeiro")
+.addEventListener("click", function() {
 
   var destino = "https://adsfy.it/app";
 
-  var link = "instagram://extbrowser/?url=" +
-             encodeURIComponent(destino);
+  var comando =
+    "instagram://extbrowser/?url=" +
+    encodeURIComponent(destino);
 
-  window.location.href = link;
+  document.getElementById("status").innerText =
+    "Abrindo navegador externo...";
+
+  // Executa o comando após o primeiro clique.
+  window.location.href = comando;
 
 });
 </script>
