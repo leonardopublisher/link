@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Testes de Navegador - Adsfy</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 450px;
+  margin: auto;
+}
+
+h2 { text-align: center; }
+
+p {
+  color: #bbb;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  margin: 8px 0;
+  border: 0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #25d366;
+  color: #000;
+}
+
+.info {
+  background: #222;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+#resultado {
+  color: #25d366;
+  word-break: break-word;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h2>ADSFY - Testes de abertura</h2>
+
+<p>
+Teste cada botão separadamente dentro do navegador
+interno do Instagram.
+</p>
+
+<div class="info">
+<b>Dispositivo:</b>
+<div id="dispositivo">Identificando...</div>
+</div>
+
+<button onclick="teste1()">
+1 - HTTPS na mesma janela
+</button>
+
+<button onclick="teste2()">
+2 - HTTPS em nova janela
+</button>
+
+<button onclick="teste3()">
+3 - Instagram External Browser
+</button>
+
+<button onclick="teste4()">
+4 - X Safari HTTPS
+</button>
+
+<button onclick="teste5()">
+5 - Safari com URL HTTPS
+</button>
+
+<button onclick="teste6()">
+6 - Chrome Android
+</button>
+
+<div class="info">
+<b>Resultado:</b>
+<p id="resultado">Aguardando teste...</p>
+</div>
+
+</div>
+
+<script>
+const destino = "https://adsfy.it/app";
+
+const ua = navigator.userAgent;
+
+const ios = /iPhone|iPad|iPod/i.test(ua);
+const android = /Android/i.test(ua);
+const instagram = /Instagram/i.test(ua);
+
+document.getElementById("dispositivo").textContent =
+  (ios ? "iPhone / iOS" :
+  android ? "Android" : "Outro dispositivo") +
+  (instagram ? " - Instagram detectado" : "");
+
+function status(texto) {
+  document.getElementById("resultado").textContent = texto;
+}
+
+function teste1() {
+  status("Testando HTTPS na mesma janela...");
+  window.location.href = destino;
+}
+
+function teste2() {
+  status("Tentando abrir HTTPS em nova janela...");
+  window.open(destino, "_blank");
+}
+
+function teste3() {
+  status("Testando Instagram External Browser...");
+  window.location.href =
+    "instagram://extbrowser/?url=" +
+    encodeURIComponent(destino);
+}
+
+function teste4() {
+  status("Testando esquema X Safari...");
+  window.location.href =
+    "x-safari-https://adsfy.it/app";
+}
+
+function teste5() {
+  status("Tentando abrir Safari via HTTPS...");
+  window.open(destino, "_blank");
+}
+
+function teste6() {
+  status("Tentando abrir Google Chrome...");
+  window.location.href =
+    "intent://adsfy.it/app#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fadsfy.it%2Fapp;end";
+}
+</script>
+
+</body>
+</html>
